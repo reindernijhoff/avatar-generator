@@ -1,5 +1,5 @@
 {
-  "name": "avatar-generator",
+  "name": "eigen-avatar-generator",
   "version": "1.0.0",
   "description": "Generative avatar generator with multiple themes. Generates unique, deterministic avatars for any ID.",
   "keywords": [
@@ -21,14 +21,14 @@
     "dist/**/*",
     "README.md"
   ],
-  "main": "./dist/avatar-generator.umd.cjs",
+  "main": "./dist/eigen-avatar-generator.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/avatar-generator.umd.cjs"
+      "require": "./dist/eigen-avatar-generator.umd.cjs"
     },
     "./core": {
       "types": "./dist/core/index.d.ts",

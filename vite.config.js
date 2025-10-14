@@ -21,10 +21,10 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
             formats: ['es', 'umd'],
-            name: 'AvatarGenerator',
+            name: 'EigenAvatarGenerator',
             fileName: (format) => {
-                if (format === 'umd') return 'avatar-generator.umd.cjs'
-                return 'avatar-generator.js'
+                if (format === 'umd') return 'eigen-avatar-generator.umd.cjs'
+                return 'eigen-avatar-generator.js'
             }
         },
         rollupOptions: {
@@ -38,8 +38,8 @@ export default defineConfig({
                 },
                 {
                     format: 'umd',
-                    name: 'AvatarGenerator',
-                    entryFileNames: 'avatar-generator.umd.cjs',
+                    name: 'EigenAvatarGenerator',
+                    entryFileNames: 'eigen-avatar-generator.umd.cjs',
                     globals: {
                         canvas: 'canvas',
                     },
