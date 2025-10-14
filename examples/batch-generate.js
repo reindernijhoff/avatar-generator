@@ -47,8 +47,7 @@ users.forEach((id, index) => {
     size: 256,
     gridSize: 8,
     density: 0.5,
-    symmetryVertical: true,
-    symmetryHorizontal: true,
+    symmetry: true,
   });
   
   const buffer = canvasToBuffer(canvas, 'image/png');

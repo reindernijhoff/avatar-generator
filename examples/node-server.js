@@ -36,9 +36,7 @@ app.get('/avatar/:id', (req, res) => {
       // Optional query parameters
       gridSize: parseInt(req.query.gridSize) || 8,
       density: parseFloat(req.query.density) || 0.5,
-      // Symmetry options (simpler defaults work better in Node.js)
-      symmetryVertical: true,
-      symmetryHorizontal: true,
+      symmetry: req.query.symmetry !== 'false', // default true
     });
     
     // Convert to buffer

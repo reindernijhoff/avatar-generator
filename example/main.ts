@@ -5,7 +5,7 @@ import { generateAvatar } from '../src/themes/digidoodle/index.js';
 const app = document.getElementById('app');
 
 if (app) {
-  for (let i = 1; i <= 128; i++) {
+  for (let i = 1; i <= 63; i++) {
     const id = String(i);
     
     // Generate avatar
@@ -14,11 +14,7 @@ if (app) {
       size: 128,
       gridSize: 8,
       density: 0.5,
-	  symmetryVertical: true,
-	  symmetryHorizontal: false,
-	  symmetryDiagonalLeft: false,
-	  symmetryDiagonalRight: false,
-	  symmetryRotational: false,
+      symmetry: true,
     });
     
     // Create container

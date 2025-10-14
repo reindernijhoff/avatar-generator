@@ -95,39 +95,21 @@ app.listen(3000);
 
 ### DigiDoodle
 
-Symmetric pixel-art avatars inspired by [DigiDoodles](https://turtletoy.net/turtle/2d25b9a16d).
+Simple symmetric pixel-art avatars inspired by [DigiDoodles](https://turtletoy.net/turtle/2d25b9a16d).
 
 ```typescript
 import { generateAvatar } from 'avatar-generator/themes/digidoodle';
-import type { DigiDoodleOptions } from 'avatar-generator/themes/digidoodle';
 
-const options: DigiDoodleOptions = {
+const canvas = generateAvatar({
   id: 'user@example.com',
   size: 256,
-  
-  // Optional customization
-  gridSize: 8,              // Number of pixels per side (default: 8)
-  spacing: 0.1,             // Space between pixels 0-1 (default: 0.1)
-  margin: 0.05,             // Margin around grid 0-1 (default: 0.05)
-  density: 0.5,             // Pixel fill probability 0-1 (default: 0.5)
-  
-  // Symmetry options
-  symmetryVertical: false,        // Vertical mirror (default: false)
-  symmetryHorizontal: false,      // Horizontal mirror (default: false)
-  symmetryDiagonalLeft: true,     // Diagonal \ (default: true)
-  symmetryDiagonalRight: true,    // Diagonal / (default: true)
-  symmetryRotational: true,       // 90° rotation (default: true)
-  
-  // Color options
-  colorCount: 3,            // Number of colors (default: 3)
-  minSaturation: 60,        // Min saturation 0-100 (default: 60)
-  maxSaturation: 90,        // Max saturation 0-100 (default: 90)
-  minLightness: 40,         // Min lightness 0-100 (default: 40)
-  maxLightness: 70,         // Max lightness 0-100 (default: 70)
-};
-
-const canvas = generateAvatar(options);
+  gridSize: 8,        // Number of pixels per side (default: 8)
+  density: 0.5,       // Pixel fill probability 0-1 (default: 0.5)
+  symmetry: true,     // Vertical mirror symmetry (default: true)
+});
 ```
+
+Each avatar gets a random color. The grid fills the entire canvas with no spacing or margins.
 
 ## Recommended Sizes
 
