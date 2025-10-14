@@ -7,6 +7,7 @@ import { SeededRandom } from '../../core/seededRandom.js';
 import type { AvatarContext } from '../../core/types.js';
 import type { DigiDoodleOptions } from './types.js';
 import { DEFAULT_DIGIDOODLE_OPTIONS } from './types.js';
+import { pickBackgroundColor, pickColors, colorToString, type Color } from '../../core/colors.js';
 
 /**
  * DigiDoodle renderer - generates symmetric pixel patterns
@@ -14,79 +15,98 @@ import { DEFAULT_DIGIDOODLE_OPTIONS } from './types.js';
 export class DigiDoodleRenderer {
   private random: SeededRandom;
   private options: DigiDoodleOptions & typeof DEFAULT_DIGIDOODLE_OPTIONS;
-  private grid: boolean[][];
-  private color: string;
+  private grids: boolean[][][]; // Array of grids (one per layer)
+  private backgroundColor: Color;
+  private foregroundColors: Color[];
 
   constructor(random: SeededRandom, options: DigiDoodleOptions) {
     this.random = random;
     this.options = { ...DEFAULT_DIGIDOODLE_OPTIONS, ...options };
-    this.grid = [];
-    this.color = '';
+    this.grids = [];
+    this.backgroundColor = { r: 255, g: 255, b: 255 };
+    this.foregroundColors = [];
   }
 
   /**
    * Render avatar on canvas
    */
   render(ctx: AvatarContext): void {
-    const { size, gridSize } = this.options;
+    const { size, gridSize, layers } = this.options;
     
-    // White background
-    ctx.fillStyle = '#ffffff';
+    // Pick colors using the color system
+    this.backgroundColor = pickBackgroundColor(this.options, this.random);
+    this.foregroundColors = pickColors(this.options, this.random, layers);
+    
+    // Render background
+    ctx.fillStyle = colorToString(this.backgroundColor);
     ctx.fillRect(0, 0, size, size);
 
-    // Pick random color
-    this.color = this.random.randomColor({
-      saturation: [60, 90],
-      lightness: [40, 70],
-    });
+    // Generate grids for each layer
+    this.initializeGrids();
 
-    // Generate random grid
-    this.initializeGrid();
-
-    // Apply vertical symmetry
+    // Apply vertical symmetry to all grids
     if (this.options.symmetry) {
       this.applySymmetry();
     }
 
-    // Render pixels
-    const pixelSize = size / gridSize;
-    ctx.fillStyle = this.color;
+    // Render all layers
+    this.renderLayers(ctx);
+  }
+
+  /**
+   * Generate grids for all layers
+   */
+  private initializeGrids(): void {
+    const { gridSize, density, layers } = this.options;
     
-    for (let y = 0; y < gridSize; y++) {
-      for (let x = 0; x < gridSize; x++) {
-        if (this.grid[y][x]) {
-          ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+    this.grids = [];
+    for (let layer = 0; layer < layers; layer++) {
+      const grid: boolean[][] = [];
+      for (let y = 0; y < gridSize; y++) {
+        grid[y] = [];
+        for (let x = 0; x < gridSize; x++) {
+          grid[y][x] = this.random.randomBoolean(density);
+        }
+      }
+      this.grids.push(grid);
+    }
+  }
+
+  /**
+   * Apply symmetry to all grids
+   */
+  private applySymmetry(): void {
+    const { gridSize } = this.options;
+    const mid = Math.floor(gridSize / 2);
+    
+    for (const grid of this.grids) {
+      for (let y = 0; y < gridSize; y++) {
+        for (let x = 0; x < mid; x++) {
+          grid[y][gridSize - 1 - x] = grid[y][x];
         }
       }
     }
   }
 
   /**
-   * Fill grid with random pixels based on density
+   * Render all layers
    */
-  private initializeGrid(): void {
-    const { gridSize, density } = this.options;
-    
-    this.grid = [];
-    for (let y = 0; y < gridSize; y++) {
-      this.grid[y] = [];
-      for (let x = 0; x < gridSize; x++) {
-        this.grid[y][x] = this.random.randomBoolean(density);
+  private renderLayers(ctx: AvatarContext): void {
+    const { size, gridSize } = this.options;
+    const pixelSize = size / gridSize;
+
+    for (let layer = 0; layer < this.grids.length; layer++) {
+      ctx.fillStyle = colorToString(this.foregroundColors[layer]);
+      const grid = this.grids[layer];
+      
+      for (let y = 0; y < gridSize; y++) {
+        for (let x = 0; x < gridSize; x++) {
+          if (grid[y][x]) {
+            ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+          }
+        }
       }
     }
   }
 
-  /**
-   * Mirror left half to right half
-   */
-  private applySymmetry(): void {
-    const { gridSize } = this.options;
-    const mid = Math.floor(gridSize / 2);
-    
-    for (let y = 0; y < gridSize; y++) {
-      for (let x = 0; x < mid; x++) {
-        this.grid[y][gridSize - 1 - x] = this.grid[y][x];
-      }
-    }
-  }
 }

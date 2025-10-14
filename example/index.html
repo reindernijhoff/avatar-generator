@@ -72,7 +72,58 @@
       word-break: break-all;
     }
 
+    .controls {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .control-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .control-group select {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      min-width: 200px;
+    }
+
+    .control-group select:hover {
+      border-color: #999;
+    }
+
+    .control-group select:focus {
+      outline: none;
+      border-color: #666;
+    }
+
     @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .control-group select {
+        min-width: auto;
+      }
+
       .grid {
         grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
         gap: 1rem;
@@ -90,6 +141,29 @@
       <h1>Avatar Generator</h1>
       <p class="subtitle">DigiDoodle Theme - Deterministic pixel-art avatars</p>
     </header>
+    <div class="controls">
+      <div class="control-group">
+        <label for="colorPreset">Color Preset:</label>
+        <select id="colorPreset">
+          <option value="random">Random colors</option>
+          <option value="fixed">Fixed red</option>
+          <option value="palette">Color palette (RGB)</option>
+          <option value="gradient">Gradient interpolation</option>
+          <option value="variations">With variations</option>
+          <option value="sets" selected>Color sets</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="layers">Layers:</label>
+        <select id="layers">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </div>
     <div id="app" class="grid"></div>
   </div>
   <script type="module" src="/main.ts"></script>
