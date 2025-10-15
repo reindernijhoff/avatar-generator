@@ -4,11 +4,10 @@ Generative avatar library with multiple themes. Generates unique, deterministic 
 
 ## Features
 
-- 🎨 **Deterministic generation**: Same ID = same avatar (always)
-- 🌳 **Tree-shakeable**: Load only the themes you use
-- 🖥️ **Universal**: Browser and Node.js (server-side rendering)
-- ⚡ **Fast**: Synchronous generation, no workers overhead
-- 🎭 **Themeable**: Easily extensible with new styles
+- **Deterministic generation**: Same ID = same avatar (always)
+- **Tree-shakeable**: Load only the themes you use
+- **Universal**: Browser and Node.js (server-side rendering)
+- **Themeable**: Easily extensible with new styles
 
 ## Installation
 
