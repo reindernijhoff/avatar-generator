@@ -291,6 +291,8 @@ export function pickColors(
   count: number,
   source: 'foreground' | 'background' = 'foreground'
 ): Color[] {
+  if (count === 1) return source === 'background' ? [pickBackgroundColor(options, random)] : [pickForegroundColor(options, random)];
+
   const palette = source === 'background' ? options.background : options.foreground;
   const interpolate = options.interpolate !== false;
   
