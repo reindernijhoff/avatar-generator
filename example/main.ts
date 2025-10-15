@@ -32,11 +32,11 @@ const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {
   sets: {
     background: '#ffffff',
     foreground: [
-      ['#ff0000', '#ff8888'],
-      ['#0000ff', '#8888ff'],
-      ['#00ff00', '#88ff88'],
+      ['#ff0000', '#ffff00'],
+      ['#0000ff', '#ff00ff'],
+      ['#00ff00', '#00ffff'],
     ],
-    interpolate: false,
+    interpolate: true,
   },
 };
 
