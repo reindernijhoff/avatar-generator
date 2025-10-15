@@ -95,7 +95,7 @@ app.listen(3000);
 
 ### DigiDoodle
 
-Simple symmetric pixel-art avatars inspired by [DigiDoodles](https://turtletoy.net/turtle/2d25b9a16d).
+Symmetric pixel-art patterns inspired by [DigiDoodles](https://turtletoy.net/turtle/2d25b9a16d).
 
 ```typescript
 import { generateAvatar } from 'avatar-generator/themes/digidoodle';
@@ -103,28 +103,29 @@ import { generateAvatar } from 'avatar-generator/themes/digidoodle';
 const canvas = generateAvatar({
   id: 'user@example.com',
   size: 256,
-  gridSize: 8,        // Number of pixels per side (default: 8)
-  density: 0.5,       // Pixel fill probability 0-1 (default: 0.5)
-  symmetry: true,     // Vertical mirror symmetry (default: true)
-  layers: 2,          // Number of color layers (default: 1)
-  
-  // Color options (optional)
-  background: '#ffffff',                                // Single color
-  foreground: '#ff0000',                                // Single color
-  // Or use color arrays:
-  foreground: ['#ff0000', '#00ff00', '#0000ff'],        // Picks random
-  // Or arrays of color sets:
-  foreground: [['#ff0000', '#ff8888'], ['#0000ff', '#8888ff']],  // Picks one set
-  interpolate: true,                                    // Interpolate between colors (default: true)
-  
-  // Random color variations
-  hueVariation: 15,                // Degrees (0-360)
-  saturationVariation: 10,         // Percent (0-100)
-  lightnessVariation: 10,          // Percent (0-100)
+  gridSize: 8,    // Grid size (default: 8)
+  density: 0.5,   // Fill probability 0-1 (default: 0.5)
+  symmetry: true, // Vertical mirror (default: true)
+  layers: 1,      // Color layers (default: 1)
 });
 ```
 
-The grid fills the entire canvas with no spacing or margins. When using multiple layers, each layer gets a different color from the foreground palette and is drawn on top of the previous layers.
+### Interference
+
+Wave interference patterns with smooth gradients.
+
+```typescript
+import { generateAvatar } from 'avatar-generator/themes/interference';
+
+const canvas = generateAvatar({
+  id: 'user@example.com',
+  size: 256,
+  sources: -1,         // Wave sources: -1 = random 2-5 (default: -1)
+  wavelength: 1,       // Wave length (default: 1)
+  sourceArea: 10,      // Source bounds (default: 10)
+  sourceDistance: 1,   // Distance scale (default: 1)
+});
+```
 
 ## Recommended Sizes
 
@@ -136,80 +137,31 @@ Use square sizes that are powers of 2 for best results:
 - `256` - Extra large (e.g. hero images)
 - `512` - Maximum (for high-DPI displays)
 
-## Color System
+## Color Options
 
-All themes support a flexible color system. Colors can be specified in multiple ways:
-
-### Simple Colors
+All themes support flexible colors:
 
 ```typescript
-{
-  background: '#ffffff',
-  foreground: '#ff0000',
-}
+// Single colors
+{ background: '#ffffff', foreground: '#ff0000' }
+
+// Color arrays (with interpolation)
+{ foreground: ['#ff0000', '#00ff00', '#0000ff'], interpolate: true }
+
+// Color sets (picks one set)
+{ foreground: [['#ff0000', '#ff8888'], ['#0000ff', '#8888ff']] }
+
+// Variations
+{ foreground: '#ff0000', hueVariation: 15, saturationVariation: 10 }
 ```
 
-### Color Arrays
+**Helper functions** for custom themes:
 
 ```typescript
-{
-  // Pick random color from list
-  foreground: ['#ff0000', '#00ff00', '#0000ff'],
-  interpolate: false,  // Pick exact colors
-}
+import { pickBackgroundColor, pickColors } from 'avatar-generator/core';
 
-// Or interpolate between colors
-{
-  foreground: ['#ff0000', '#ff8800', '#ffff00'],
-  interpolate: true,   // Blend between adjacent colors (default)
-}
-```
-
-### Color Sets (for multi-color themes)
-
-```typescript
-{
-  // Array of color sets - picks one set randomly
-  foreground: [
-    ['#ff0000', '#ff8888'],  // Red set (primary + accent)
-    ['#0000ff', '#8888ff'],  // Blue set
-    ['#00ff00', '#88ff88'],  // Green set
-  ],
-}
-```
-
-Using `pickColors()` with color sets will pick colors from the selected set, with interpolation support.
-
-### Random Variations
-
-Add natural variation to colors:
-
-```typescript
-{
-  foreground: '#ff0000',
-  hueVariation: 15,           // ±15 degrees
-  saturationVariation: 10,    // ±10%
-  lightnessVariation: 10,     // ±10%
-}
-```
-
-### Helper Functions
-
-Create custom themes easily:
-
-```typescript
-import { pickBackgroundColor, pickForegroundColor, pickColors } from 'avatar-generator/core';
-
-// In your theme renderer
 const bgColor = pickBackgroundColor(options, random);
-const fgColor = pickForegroundColor(options, random);
-
-// Pick multiple colors (e.g., for multi-color themes)
-const colors = pickColors(options, random, 3);  // Pick 3 from foreground
-const [primary, accent, tertiary] = colors;
-
-// Or pick from background
-const bgColors = pickColors(options, random, 2, 'background');
+const [primary, accent] = pickColors(options, random, 2);
 ```
 
 ## API Reference

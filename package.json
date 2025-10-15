@@ -37,6 +37,10 @@
     "./themes/digidoodle": {
       "types": "./dist/themes/digidoodle/index.d.ts",
       "import": "./dist/themes/digidoodle/index.js"
+    },
+    "./themes/interference": {
+      "types": "./dist/themes/interference/index.d.ts",
+      "import": "./dist/themes/interference/index.js"
     }
   },
   "peerDependencies": {

@@ -143,6 +143,13 @@
     </header>
     <div class="controls">
       <div class="control-group">
+        <label for="theme">Theme:</label>
+        <select id="theme">
+          <option value="digidoodle" selected>DigiDoodle</option>
+          <option value="interference">Interference</option>
+        </select>
+      </div>
+      <div class="control-group">
         <label for="colorPreset">Color Preset:</label>
         <select id="colorPreset">
           <option value="random">Random colors</option>
@@ -153,7 +160,7 @@
           <option value="sets" selected>Color sets</option>
         </select>
       </div>
-      <div class="control-group">
+      <div class="control-group" id="layersControl">
         <label for="layers">Layers:</label>
         <select id="layers">
           <option value="1" selected>1</option>

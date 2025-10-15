@@ -1,6 +1,8 @@
 // Import from parent package via relative path
-import { generateAvatar } from '../src/themes/digidoodle/index.js';
+import { generateAvatar as generateDigiDoodle } from '../src/themes/digidoodle/index.js';
+import { generateAvatar as generateInterference } from '../src/themes/interference/index.js';
 import type { DigiDoodleOptions } from '../src/themes/digidoodle/types.js';
+import type { InterferenceOptions } from '../src/themes/interference/types.js';
 
 // Color presets based on the examples
 const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {
@@ -42,8 +44,20 @@ const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {
 
 // Get elements
 const app = document.getElementById('app');
+const themeSelect = document.getElementById('theme') as HTMLSelectElement;
 const colorPresetSelect = document.getElementById('colorPreset') as HTMLSelectElement;
 const layersSelect = document.getElementById('layers') as HTMLSelectElement;
+const layersControl = document.getElementById('layersControl') as HTMLElement;
+
+// Update UI based on theme
+function updateThemeUI() {
+  const theme = themeSelect.value;
+  
+  // Show/hide layers control (only for DigiDoodle)
+  if (layersControl) {
+    layersControl.style.display = theme === 'digidoodle' ? 'flex' : 'none';
+  }
+}
 
 // Generate avatars
 function generateAvatars() {
@@ -53,6 +67,7 @@ function generateAvatars() {
   app.innerHTML = '';
 
   // Get current settings
+  const theme = themeSelect.value;
   const preset = colorPresetSelect.value;
   const layers = parseInt(layersSelect.value);
 
@@ -63,16 +78,30 @@ function generateAvatars() {
   for (let i = 1; i <= 63; i++) {
     const id = String(i);
     
-    // Generate avatar
-    const canvas = generateAvatar({
-      id,
-      size: 128,
-      gridSize: 8,
-      density: 0.5,
-      symmetry: true,
-      layers,
-      ...colorOptions,
-    });
+    // Generate avatar based on theme
+    let canvas: HTMLCanvasElement;
+    
+    if (theme === 'interference') {
+      canvas = generateInterference({
+        id,
+        size: 128,
+        sources: -1,  // Random 2-5
+        wavelength: 1,
+        sourceArea: 10,
+        sourceDistance: 1,
+        ...colorOptions,
+      } as InterferenceOptions);
+    } else {
+      canvas = generateDigiDoodle({
+        id,
+        size: 128,
+        gridSize: 8,
+        density: 0.5,
+        symmetry: true,
+        layers,
+        ...colorOptions,
+      } as DigiDoodleOptions);
+    }
     
     // Create container
     const item = document.createElement('div');
@@ -93,10 +122,15 @@ function generateAvatars() {
 }
 
 // Event listeners
-if (colorPresetSelect && layersSelect) {
+if (themeSelect && colorPresetSelect && layersSelect) {
+  themeSelect.addEventListener('change', () => {
+    updateThemeUI();
+    generateAvatars();
+  });
   colorPresetSelect.addEventListener('change', generateAvatars);
   layersSelect.addEventListener('change', generateAvatars);
 }
 
-// Initial generation
+// Initial setup
+updateThemeUI();
 generateAvatars();
