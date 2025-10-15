@@ -112,6 +112,7 @@ const canvas = generateAvatar({
   density: 0.5,   // Fill probability 0-1 (default: 0.5)
   symmetry: true, // Vertical mirror (default: true)
   layers: 1,      // Color layers (default: 1)
+  borderMargin: 0, // Border margin (default: 0)
 });
 ```
 

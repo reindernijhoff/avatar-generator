@@ -58,6 +58,8 @@ export class DigiDoodleRenderer {
    */
   private initializeGrids(): void {
     const { gridSize, density, layers } = this.options;
+    let { borderMargin } = this.options;
+    if (borderMargin === undefined) borderMargin = 0;
     
     this.grids = [];
     for (let layer = 0; layer < layers; layer++) {
@@ -65,7 +67,17 @@ export class DigiDoodleRenderer {
       for (let y = 0; y < gridSize; y++) {
         grid[y] = [];
         for (let x = 0; x < gridSize; x++) {
-          grid[y][x] = this.random.randomBoolean(density);
+          if (
+            x >= borderMargin &&
+            y >= borderMargin &&
+            x < gridSize - 1 - borderMargin &&
+            y < gridSize - 1 - borderMargin
+          ) {
+            grid[y][x] = this.random.randomBoolean(density);
+          }
+          else {
+            grid[y][x] = false;
+          }
         }
       }
       this.grids.push(grid);

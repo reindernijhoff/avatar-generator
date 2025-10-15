@@ -18,6 +18,8 @@ export interface DigiDoodleOptions extends GeneratorOptions, ColorOptions {
   symmetry?: boolean;
   /** Number of color layers to draw (default: 1) */
   layers?: number;
+  /** border margin (default: 0) */
+  borderMargin?: number;
 }
 
 /**
