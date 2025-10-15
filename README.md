@@ -2,6 +2,12 @@
 
 Generative avatar library with multiple themes. Generates unique, deterministic avatars for any ID.
 
+## Demo
+
+- [Avatar Generator](https://reindernijhoff.github.io/avatar-generator/).
+
+This is a build from the repository's example/ directory.
+
 ## Features
 
 - **Deterministic generation**: Same ID = same avatar (always)
@@ -123,6 +129,27 @@ const canvas = generateAvatar({
   wavelength: 1,       // Wave length (default: 1)
   sourceArea: 10,      // Source bounds (default: 10)
   sourceDistance: 1,   // Distance scale (default: 1)
+});
+```
+
+### Plasma
+
+Classic plasma effect using combined sinusoids.
+
+```typescript
+import { generateAvatar } from 'avatar-generator/themes/plasma';
+
+const canvas = generateAvatar({
+  id: 'user@example.com',
+  size: 256,
+  timeOffset: -1,    // Time: -1 = random (default: -1)
+  scale1: -1,        // Angled scale: -1 = random 2-4 (default: -1)
+  scale2: -1,        // Diagonal scale: -1 = random 2-4 (default: -1)
+  scale3: -1,        // Concentric scale: -1 = random 15-30 (default: -1)
+  weight1: -1,       // Angled weight: -1 = random 0.5-1.5 (default: -1)
+  weight2: -1,       // Diagonal weight: -1 = random 0.5-1.5 (default: -1)
+  weight3: -1,       // Concentric weight: -1 = random 0.5-1.5 (default: -1)
+  paletteSize: 256,  // Color palette size (default: 256)
 });
 ```
 

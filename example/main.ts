@@ -1,8 +1,10 @@
 // Import from parent package via relative path
 import { generateAvatar as generateDigiDoodle } from '../src/themes/digidoodle/index.js';
 import { generateAvatar as generateInterference } from '../src/themes/interference/index.js';
+import { generateAvatar as generatePlasma } from '../src/themes/plasma/index.js';
 import type { DigiDoodleOptions } from '../src/themes/digidoodle/types.js';
 import type { InterferenceOptions } from '../src/themes/interference/types.js';
+import type { PlasmaOptions } from '../src/themes/plasma/types.js';
 
 // Color presets based on the examples
 const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {
@@ -91,6 +93,17 @@ function generateAvatars() {
         sourceDistance: 1,
         ...colorOptions,
       } as InterferenceOptions);
+    } else if (theme === 'plasma') {
+      canvas = generatePlasma({
+        id,
+        size: 128,
+        timeOffset: -1,   // Random
+        scale1: -1,       // Random 8-12
+        scale2: -1,       // Random 8-12
+        scale3: -1,       // Random 80-120
+        paletteSize: 256,
+        ...colorOptions,
+      } as PlasmaOptions);
     } else {
       canvas = generateDigiDoodle({
         id,
