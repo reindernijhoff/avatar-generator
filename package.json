@@ -1,6 +1,6 @@
 {
   "name": "eigen-avatar-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generative avatar generator with multiple themes. Generates unique, deterministic avatars for any ID.",
   "keywords": [
     "generative art",
