@@ -13,7 +13,10 @@
     "creative coding",
     "avatar generator"
   ],
-  "repository": "git@github.com:reindernijhoff/avatar-generator.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/reindernijhoff/avatar-generator.git"
+  },
   "author": "Reinder Nijhoff <reinder@infi.nl>",
   "license": "MIT",
   "type": "module",
