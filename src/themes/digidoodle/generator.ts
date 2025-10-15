@@ -70,8 +70,8 @@ export class DigiDoodleRenderer {
           if (
             x >= borderMargin &&
             y >= borderMargin &&
-            x < gridSize - 1 - borderMargin &&
-            y < gridSize - 1 - borderMargin
+            x <= gridSize - 1 - borderMargin &&
+            y <= gridSize - 1 - borderMargin
           ) {
             grid[y][x] = this.random.randomBoolean(density);
           }
