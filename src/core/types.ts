@@ -22,6 +22,8 @@ export interface GeneratorOptions {
   id: string;
   /** Canvas size in pixels (square) */
   size: number;
+  /** Optional existing canvas to render into (if not provided, a new one will be created) */
+  canvas?: AvatarCanvas;
 }
 
 /**

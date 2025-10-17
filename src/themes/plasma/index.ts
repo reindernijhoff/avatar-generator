@@ -3,7 +3,7 @@
  * Classic plasma effect using combined sinusoids
  */
 
-import { createCanvas } from '../../core/canvas.js';
+import { getCanvas } from '../../core/canvas.js';
 import { SeededRandom } from '../../core/seededRandom.js';
 import type { PlasmaOptions } from './types.js';
 import { PlasmaRenderer } from './generator.js';
@@ -14,10 +14,10 @@ export type { PlasmaOptions } from './types.js';
  * Generate a plasma pattern avatar
  */
 export function generateAvatar(options: PlasmaOptions): HTMLCanvasElement {
-  const { id, size } = options;
+  const { id, size, canvas: existingCanvas } = options;
   
-  // Create canvas
-  const { canvas, ctx } = createCanvas(size);
+  // Get or create canvas
+  const { canvas, ctx } = getCanvas(size, existingCanvas);
   
   // Create seeded random
   const random = new SeededRandom(id);

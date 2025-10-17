@@ -7,9 +7,9 @@ export interface AvatarDigiDoodleProps extends Partial<Omit<DigiDoodleOptions, '
   id: string;
   /** Canvas size in pixels (default: 256) */
   size?: number;
-  /** Optional className for the container div */
+  /** Optional className for the canvas element */
   className?: string;
-  /** Optional inline styles for the container div */
+  /** Optional inline styles for the canvas element */
   style?: React.CSSProperties;
   /** Callback when avatar is generated */
   onGenerate?: (canvas: HTMLCanvasElement) => void;
@@ -36,23 +36,22 @@ export function AvatarDigiDoodle({
   onGenerate,
   ...options
 }: AvatarDigiDoodleProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Generate new avatar
-    const canvas = generateAvatar({ id, size, ...options });
-    canvasRef.current = canvas;
+    if (!canvasRef.current) return;
 
-    // Mount to DOM
-    if (containerRef.current) {
-      containerRef.current.innerHTML = '';
-      containerRef.current.appendChild(canvas);
-    }
+    // Generate avatar directly into the canvas ref
+    const canvas = generateAvatar({ 
+      id, 
+      size, 
+      canvas: canvasRef.current,
+      ...options 
+    });
 
     // Trigger callback
     onGenerate?.(canvas);
   }, [id, size, JSON.stringify(options)]);
 
-  return <div ref={containerRef} className={className} style={style} />;
+  return <canvas ref={canvasRef} className={className} style={style} />;
 }
