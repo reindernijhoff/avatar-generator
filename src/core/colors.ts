@@ -216,7 +216,7 @@ function pickFromPalette(palette: ColorPalette, random: SeededRandom, interpolat
     const first = palette[0];
     
     // Array of arrays - pick random array
-    if (Array.isArray(first) && !isSingleColor(first)) {
+    if (Array.isArray(first)) {
       const colorArray = random.randomChoice(palette as ColorValue[][]) as ColorValue[];
       return pickFromColorArray(colorArray, random, interpolate);
     }
@@ -264,20 +264,13 @@ export function pickBackgroundColor(options: ColorOptions, random: SeededRandom)
  * Pick foreground color
  */
 export function pickForegroundColor(options: ColorOptions, random: SeededRandom): Color {
-  if (options.foreground) {
-    const interpolate = options.interpolate !== false; // default true
-    const color = pickFromPalette(options.foreground, random, interpolate);
-    return varyColor(color, random, options);
-  }
-
-  // Default: random vibrant color
-  const hsl = hslToRgb(
+  const interpolate = options.interpolate !== false; // default true
+  const color = options.foreground ? pickFromPalette(options.foreground , random, interpolate) : hslToRgb(
     random.randomFloat(0, 360),
     random.randomFloat(60, 90),
     random.randomFloat(40, 70)
   );
-  
-  return varyColor(hsl, random, options);
+  return varyColor(color, random, options);
 }
 
 /**
