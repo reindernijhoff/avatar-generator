@@ -108,9 +108,6 @@ function generateAvatars() {
       canvas = generateDigiDoodle({
         id,
         size: 128,
-        gridSize: 8,
-        density: 0.5,
-        symmetry: true,
         layers,
         ...colorOptions,
       } as DigiDoodleOptions);

@@ -114,7 +114,11 @@ export class DigiDoodleRenderer {
       for (let y = 0; y < gridSize; y++) {
         for (let x = 0; x < gridSize; x++) {
           if (grid[y][x]) {
-            ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+            const px = x * pixelSize | 0;
+            const py = y * pixelSize | 0;
+            const width = ((x+1) * pixelSize | 0) - px;
+            const height = ((y+1) * pixelSize | 0) - py;
+            ctx.fillRect(px, py, width, height);
           }
         }
       }

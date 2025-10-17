@@ -26,8 +26,9 @@ export interface DigiDoodleOptions extends GeneratorOptions, ColorOptions {
  * Default DigiDoodle options
  */
 export const DEFAULT_DIGIDOODLE_OPTIONS = {
-  gridSize: 8,
+  gridSize: 9,
   density: 0.5,
   symmetry: true,
   layers: 1,
+  borderMargin: 1,
 };
