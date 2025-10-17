@@ -48,13 +48,21 @@
     "./themes/plasma": {
       "types": "./dist/themes/plasma/index.d.ts",
       "import": "./dist/themes/plasma/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
     }
   },
   "peerDependencies": {
-    "canvas": "^2.11.2"
+    "canvas": "^2.11.2",
+    "react": "^18.0.0"
   },
   "peerDependenciesMeta": {
     "canvas": {
+      "optional": true
+    },
+    "react": {
       "optional": true
     }
   },
@@ -69,7 +77,9 @@
     "example": "npm run dev --prefix example"
   },
   "devDependencies": {
+    "@types/react": "^18.3.12",
     "@types/shelljs": "^0.8.15",
+    "react": "^18.3.1",
     "shelljs": "^0.10.0",
     "shx": "^0.4.0",
     "tsx": "^4.7.1",

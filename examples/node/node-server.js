@@ -9,8 +9,8 @@
  */
 
 import express from 'express';
-import { generateAvatar } from '../dist/themes/digidoodle/index.js';
-import { canvasToBuffer, initNodeCanvas } from '../dist/core/canvas.js';
+import { generateAvatar } from '../../dist/themes/digidoodle/index.js';
+import { canvasToBuffer, initNodeCanvas } from '../../dist/core/canvas.js';
 
 const app = express();
 const PORT = 3000;

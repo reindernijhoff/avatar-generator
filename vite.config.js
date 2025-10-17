@@ -28,7 +28,7 @@ export default defineConfig({
             }
         },
         rollupOptions: {
-            external: ['canvas'],
+            external: ['canvas', 'react', 'react/jsx-runtime'],
             output: [
                 {
                     format: 'es',

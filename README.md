@@ -18,12 +18,17 @@ This is a build from the repository's example/ directory.
 ## Installation
 
 ```bash
-npm install avatar-generator
+npm install eigen-avatar-generator
+```
+
+For React applications:
+```bash
+npm install eigen-avatar-generator react
 ```
 
 For server-side rendering (Node.js):
 ```bash
-npm install avatar-generator canvas
+npm install eigen-avatar-generator canvas
 ```
 
 ## Quick Start
@@ -38,10 +43,39 @@ npm run dev
 
 ## Usage
 
-### Browser
+### React Components
+
+For React applications, use the ready-to-use components:
+
+```tsx
+import { AvatarDigiDoodle } from 'eigen-avatar-generator/react';
+
+function UserProfile({ userId }) {
+  return (
+    <div>
+      <AvatarDigiDoodle 
+        id={userId} 
+        size={256}
+        gridSize={8}
+        density={0.5}
+        className="rounded-full"
+      />
+    </div>
+  );
+}
+```
+
+All three themes have corresponding React components:
+- `AvatarDigiDoodle`
+- `AvatarInterference`
+- `AvatarPlasma`
+
+**Note:** React components require React as a peer dependency. The React wrapper is fully tree-shakeable - vanilla JS users won't include any React code.
+
+### Browser (Vanilla JS)
 
 ```typescript
-import { generateAvatar } from 'avatar-generator/themes/digidoodle';
+import { generateAvatar } from 'eigen-avatar-generator/themes/digidoodle';
 
 const canvas = generateAvatar({ 
   id: 'user@example.com', 
@@ -217,16 +251,51 @@ random.randomBoolean();       // true/false
 random.randomColor();         // HSL color string
 ```
 
+## React Components API
+
+All React components accept the same props as their vanilla counterparts, plus additional React-specific props:
+
+```tsx
+interface BaseAvatarProps {
+  id: string;                          // Required: unique identifier
+  size?: number;                       // Canvas size (default: 256)
+  className?: string;                  // CSS class for container
+  style?: React.CSSProperties;         // Inline styles for container
+  onGenerate?: (canvas: HTMLCanvasElement) => void;  // Callback after generation
+  
+  // Plus all theme-specific options (gridSize, density, etc.)
+}
+```
+
+**Example with all props:**
+```tsx
+<AvatarDigiDoodle
+  id="user@example.com"
+  size={256}
+  gridSize={8}
+  density={0.5}
+  symmetry={true}
+  layers={2}
+  foreground={['#ff0000', '#00ff00']}
+  className="avatar rounded-full shadow-lg"
+  style={{ border: '2px solid white' }}
+  onGenerate={(canvas) => console.log('Avatar generated!', canvas)}
+/>
+```
+
 ## Tree-shaking
 
 Import only what you need for smallest bundle:
 
 ```typescript
-// ✅ Good: Tree-shakeable
-import { generateAvatar } from 'avatar-generator/themes/digidoodle';
+// ✅ React component (only for React apps)
+import { AvatarDigiDoodle } from 'eigen-avatar-generator/react';
+
+// ✅ Vanilla JS (no React code included)
+import { generateAvatar } from 'eigen-avatar-generator/themes/digidoodle';
 
 // ⚠️ Also OK, but loads all exports
-import { DigiDoodle } from 'avatar-generator';
+import { DigiDoodle } from 'eigen-avatar-generator';
 const canvas = DigiDoodle.generateAvatar({ id: 'foo', size: 256 });
 ```
 

@@ -1,10 +1,10 @@
 // Import from parent package via relative path
-import { generateAvatar as generateDigiDoodle } from '../src/themes/digidoodle/index.js';
-import { generateAvatar as generateInterference } from '../src/themes/interference/index.js';
-import { generateAvatar as generatePlasma } from '../src/themes/plasma/index.js';
-import type { DigiDoodleOptions } from '../src/themes/digidoodle/types.js';
-import type { InterferenceOptions } from '../src/themes/interference/types.js';
-import type { PlasmaOptions } from '../src/themes/plasma/types.js';
+import { generateAvatar as generateDigiDoodle } from '../../src/themes/digidoodle/index.js';
+import { generateAvatar as generateInterference } from '../../src/themes/interference/index.js';
+import { generateAvatar as generatePlasma } from '../../src/themes/plasma/index.js';
+import type { DigiDoodleOptions } from '../../src/themes/digidoodle/types.js';
+import type { InterferenceOptions } from '../../src/themes/interference/types.js';
+import type { PlasmaOptions } from '../../src/themes/plasma/types.js';
 
 // Color presets based on the examples
 const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {

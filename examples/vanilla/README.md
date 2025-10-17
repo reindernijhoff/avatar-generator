@@ -16,10 +16,10 @@ Open browser to the shown URL (usually http://localhost:5173).
 This is a separate Vite project that uses the parent package via relative imports:
 
 ```typescript
-import { generateAvatar } from '../src/themes/digidoodle/index.js';
+import { generateAvatar } from '../../src/themes/digidoodle/index.js';
 ```
 
-It generates a grid of 24 avatars with IDs '1' through '24', where each ID deterministically produces the same avatar.
+It generates a grid of 63 avatars with IDs '1' through '63', where each ID deterministically produces the same avatar.
 
 ## Structure
 
