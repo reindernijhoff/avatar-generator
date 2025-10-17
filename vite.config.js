@@ -19,32 +19,20 @@ export default defineConfig({
     build: {
         target: 'esnext',
         lib: {
-            entry: resolve(__dirname, 'src/index.ts'),
-            formats: ['es', 'umd'],
-            name: 'EigenAvatarGenerator',
-            fileName: (format) => {
-                if (format === 'umd') return 'eigen-avatar-generator.umd.cjs'
-                return 'eigen-avatar-generator.js'
-            }
+            entry: {
+                'index': resolve(__dirname, 'src/index.ts'),
+                'react/index': resolve(__dirname, 'src/react/index.ts'),
+            },
+            formats: ['es'],
         },
         rollupOptions: {
             external: ['canvas', 'react', 'react/jsx-runtime'],
-            output: [
-                {
-                    format: 'es',
-                    entryFileNames: '[name].js',
-                    preserveModules: true,
-                    preserveModulesRoot: 'src',
-                },
-                {
-                    format: 'umd',
-                    name: 'EigenAvatarGenerator',
-                    entryFileNames: 'eigen-avatar-generator.umd.cjs',
-                    globals: {
-                        canvas: 'canvas',
-                    },
-                },
-            ],
+            output: {
+                format: 'es',
+                entryFileNames: '[name].js',
+                preserveModules: true,
+                preserveModulesRoot: 'src',
+            },
         },
     }
 })

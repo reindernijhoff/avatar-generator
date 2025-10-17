@@ -48,7 +48,11 @@ npm run dev
 For React applications, use the ready-to-use components:
 
 ```tsx
+// Import all components (convenient)
 import { AvatarDigiDoodle } from 'eigen-avatar-generator/react';
+
+// Or import individual components (optimal tree-shaking)
+import { AvatarDigiDoodle } from 'eigen-avatar-generator/react/digidoodle';
 
 function UserProfile({ userId }) {
   return (
@@ -66,9 +70,9 @@ function UserProfile({ userId }) {
 ```
 
 All three themes have corresponding React components:
-- `AvatarDigiDoodle`
-- `AvatarInterference`
-- `AvatarPlasma`
+- `AvatarDigiDoodle` - `eigen-avatar-generator/react/digidoodle`
+- `AvatarInterference` - `eigen-avatar-generator/react/interference`
+- `AvatarPlasma` - `eigen-avatar-generator/react/plasma`
 
 **Note:** React components require React as a peer dependency. The React wrapper is fully tree-shakeable - vanilla JS users won't include any React code.
 
