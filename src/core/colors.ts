@@ -388,10 +388,13 @@ function pickColorsFromArray(
     return generateColorVariations(baseColor, random, count, options);
   }
 
+  const randomOffset = random.randomInt(0, colors.length - 1);
+  const t = random.random();
+
   // No interpolation - pick directly from array in order
   if (!interpolate) {
     for (let i = 0; i < count; i++) {
-      const colorValue = colors[i % colors.length];
+      const colorValue = colors[(i + randomOffset) % colors.length];
       result.push(varyColor(parseColor(colorValue), random, options));
     }
     return result;
@@ -400,12 +403,12 @@ function pickColorsFromArray(
   // With interpolation - interpolate between two adjacent colors (circular)
   for (let i = 0; i < count; i++) {
     // Pick two adjacent indices (circular)
-    const idx1 = i % colors.length;
+    const idx1 = (i + randomOffset) % colors.length;
     const idx2 = (idx1 + 1) % colors.length;
+    
     
     const color1 = parseColor(colors[idx1]);
     const color2 = parseColor(colors[idx2]);
-    const t = random.random();
     
     result.push(varyColor(interpolateColors(color1, color2, t), random, options));
   }

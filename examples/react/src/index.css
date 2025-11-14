@@ -6,8 +6,9 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: #f5f5f5;
-  padding: 2rem;
+  background: #ffffff;
+  color: #333;
+  padding: 3rem 2rem;
 }
 
 .container {
@@ -15,27 +16,192 @@ body {
   margin: 0 auto;
 }
 
+/* Header */
 header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 h1 {
   font-size: 2rem;
-  color: #333;
+  color: #000;
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .subtitle {
   color: #666;
   font-size: 0.9rem;
+  margin-bottom: 2rem;
 }
 
+/* Controls Container */
+.controls-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Theme Selection */
+.theme-selector {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  height: 48px;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-button.active {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.theme-icon > div {
+  width: 100%;
+  height: 100%;
+}
+
+.theme-icon canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.theme-label {
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Controls Row */
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  height: 48px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.control-group select {
+  padding: 0.4rem 2rem 0.4rem 0.75rem;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  min-width: 140px;
+  height: 32px;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.control-group select:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-group select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Shape Selector */
+.shape-selector {
+  display: flex;
+  gap: 0.25rem;
+  background: white;
+  padding: 0.25rem;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shape-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  color: #999;
+  transition: all 0.2s;
+}
+
+.shape-button:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.shape-button.active {
+  background: #000;
+  color: white;
+}
+
+/* Avatar Shapes */
+.shape-circle canvas {
+  border-radius: 50%;
+}
+
+.shape-square canvas {
+  border-radius: 0;
+}
+
+/* Grid Section */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .avatar-item {
@@ -46,16 +212,15 @@ h1 {
 }
 
 .avatar-item > div:first-child {
-  width: 100%;
+  width: 80px;
+  height: 80px;
 }
 
 .avatar-item canvas {
-  width: 100% !important;
-  height: auto !important;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 80px !important;
+  height: 80px !important;
   image-rendering: pixelated;
-  transition: transform 0.2s;
+  transition: transform 0.2s, border-radius 0.2s;
 }
 
 .avatar-item canvas:hover {
@@ -63,70 +228,64 @@ h1 {
 }
 
 .avatar-id {
-  font-size: 0.75rem;
-  color: #999;
+  font-size: 0.7rem;
+  color: #666;
   text-align: center;
-  word-break: break-all;
-}
-
-.controls {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.control-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.control-group label {
-  font-size: 0.9rem;
   font-weight: 500;
-  color: #333;
-}
-
-.control-group select {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: white;
-  font-size: 0.9rem;
-  cursor: pointer;
-  min-width: 200px;
-}
-
-.control-group select:hover {
-  border-color: #999;
-}
-
-.control-group select:focus {
-  outline: none;
-  border-color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {
-  .controls {
+  body {
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .controls-container {
+    gap: 0.75rem;
     flex-direction: column;
-    gap: 1rem;
+  }
+
+  .theme-selector {
+    padding: 0.5rem;
+  }
+
+  .theme-button {
+    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  }
+
+  .theme-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .theme-label {
+    font-size: 0.8rem;
+  }
+
+  .controls {
+    padding: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .control-group label {
+    font-size: 0.8rem;
   }
 
   .control-group select {
-    min-width: auto;
+    min-width: 100px;
+    font-size: 0.8rem;
   }
 
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     gap: 1rem;
-  }
-  
-  body {
-    padding: 1rem;
   }
 }
