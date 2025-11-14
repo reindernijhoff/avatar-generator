@@ -19,3 +19,6 @@ export type { AvatarInterferenceProps } from './AvatarInterference.js';
 
 export { AvatarPlasma } from './AvatarPlasma.js';
 export type { AvatarPlasmaProps } from './AvatarPlasma.js';
+
+export { AvatarSmile } from './AvatarSmile.js';
+export type { AvatarSmileProps } from './AvatarSmile.js';

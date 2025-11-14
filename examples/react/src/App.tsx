@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { AvatarDigiDoodle } from '../../../src/react/AvatarDigiDoodle';
 import { AvatarInterference } from '../../../src/react/AvatarInterference';
 import { AvatarPlasma } from '../../../src/react/AvatarPlasma';
+import { AvatarSmile } from '../../../src/react/AvatarSmile';
 import type { DigiDoodleOptions } from '../../../src/themes/digidoodle/types';
 import { faker } from '@faker-js/faker';
 
-type Theme = 'digidoodle' | 'interference' | 'plasma';
+type Theme = 'digidoodle' | 'interference' | 'plasma' | 'smile';
 type ColorPreset = 'random' | 'fixed' | 'palette' | 'gradient' | 'variations' | 'sets';
 type Shape = 'circle' | 'square';
 
@@ -52,6 +53,7 @@ const themes: Array<{ id: Theme; name: string }> = [
   { id: 'digidoodle', name: 'DigiDoodle' },
   { id: 'interference', name: 'Interference' },
   { id: 'plasma', name: 'Plasma' },
+  { id: 'smile', name: 'Smile' },
 ];
 
 // Generate deterministic name from ID
@@ -119,6 +121,13 @@ function App() {
                     scale2={-1}
                     scale3={-1}
                     paletteSize={256}
+                    {...colorOptions}
+                  />
+                )}
+                {t.id === 'smile' && (
+                  <AvatarSmile
+                    id={`${t.id}-icon`}
+                    size={64}
                     {...colorOptions}
                   />
                 )}
@@ -205,6 +214,13 @@ function App() {
                   scale2={-1}
                   scale3={-1}
                   paletteSize={256}
+                  {...colorOptions}
+                />
+              )}
+              {theme === 'smile' && (
+                <AvatarSmile
+                  id={id}
+                  size={128}
                   {...colorOptions}
                 />
               )}

@@ -2,9 +2,11 @@
 import { generateAvatar as generateDigiDoodle } from '../../src/themes/digidoodle/index.js';
 import { generateAvatar as generateInterference } from '../../src/themes/interference/index.js';
 import { generateAvatar as generatePlasma } from '../../src/themes/plasma/index.js';
+import { generateAvatar as generateSmile } from '../../src/themes/smile/index.js';
 import type { DigiDoodleOptions } from '../../src/themes/digidoodle/types.js';
 import type { InterferenceOptions } from '../../src/themes/interference/types.js';
 import type { PlasmaOptions } from '../../src/themes/plasma/types.js';
+import type { SmileOptions } from '../../src/themes/smile/types.js';
 import { faker } from '@faker-js/faker';
 
 // Color presets based on the examples
@@ -51,6 +53,7 @@ const themes = [
   { id: 'digidoodle', name: 'DigiDoodle' },
   { id: 'interference', name: 'Interference' },
   { id: 'plasma', name: 'Plasma' },
+  { id: 'smile', name: 'Smile' },
 ];
 
 // Generate deterministic name from ID
@@ -108,6 +111,12 @@ function generateSingleAvatar(id: string, size: number): HTMLCanvasElement {
       paletteSize: 256,
       ...colorOptions,
     } as PlasmaOptions);
+  } else if (currentTheme === 'smile') {
+    canvas = generateSmile({
+      id,
+      size,
+      ...colorOptions,
+    } as SmileOptions);
   } else {
     canvas = generateDigiDoodle({
       id,
