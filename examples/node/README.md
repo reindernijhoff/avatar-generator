@@ -3,6 +3,7 @@
 These are **Node.js server-side** examples. For a browser example, see `/example` directory in the root.
 
 **Important**: Build the package first before running these examples:
+
 ```bash
 npm run build
 ```
@@ -20,6 +21,7 @@ node examples/node-server.js
 ```
 
 Visit:
+
 - http://localhost:3000/avatar/user@example.com
 - http://localhost:3000/avatar/alice?size=128
 - http://localhost:3000/avatar/bob?size=256&gridSize=12

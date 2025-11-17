@@ -20,6 +20,7 @@ import { AvatarDigiDoodle } from '../../../src/react/AvatarDigiDoodle';
 ```
 
 It demonstrates:
+
 - Using React components for all three themes (DigiDoodle, Interference, Plasma)
 - Dynamic theme switching
 - Color preset controls
@@ -38,6 +39,7 @@ This demonstrates how the React wrapper works without needing the package to be 
 ## Features
 
 The example shows:
+
 - All three avatar themes as React components
 - Interactive controls for theme, color presets, and layers
 - 63 avatars displayed in a responsive grid

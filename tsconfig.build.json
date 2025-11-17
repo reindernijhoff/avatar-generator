@@ -4,5 +4,7 @@
     "allowJs": true,
     "declaration": false
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ]
 }

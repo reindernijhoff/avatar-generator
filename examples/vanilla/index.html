@@ -1,338 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avatar Generator - Playground</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Generator - Playground</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #ffffff;
-      color: #333;
-      padding: 3rem 2rem;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #333;
+            padding: 3rem 2rem;
+        }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-    /* Header */
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-    h1 {
-      font-size: 2rem;
-      color: #000;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
+        h1 {
+            font-size: 2rem;
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
 
-    .subtitle {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
+        .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
 
-    /* Controls Container */
-    .controls-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
+        /* Controls Container */
+        .controls-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
 
-    /* Theme Selection */
-    .theme-selector {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      background: #f5f5f5;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      height: 48px;
-    }
+        /* Theme Selection */
+        .theme-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            height: 48px;
+        }
 
-    .theme-button {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.75rem 0.25rem 0.25rem;
-      background: transparent;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+        .theme-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
 
-    .theme-button:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
+        .theme-button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
 
-    .theme-button.active {
-      background: white;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
+        .theme-button.active {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
 
-    .theme-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
+        .theme-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
 
-    .theme-icon canvas {
-      width: 100%;
-      height: 100%;
-    }
+        .theme-icon canvas {
+            width: 100%;
+            height: 100%;
+        }
 
-    .theme-label {
-      font-size: 0.85rem;
-      color: #333;
-      font-weight: 500;
-      white-space: nowrap;
-    }
+        .theme-label {
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: 500;
+            white-space: nowrap;
+        }
 
-    /* Controls Row */
-    .controls {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      background: #f5f5f5;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      height: 48px;
-    }
+        /* Controls Row */
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            height: 48px;
+        }
 
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .control-group label {
-      font-size: 0.85rem;
-      color: #666;
-      font-weight: 500;
-      white-space: nowrap;
-    }
+        .control-group label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+            white-space: nowrap;
+        }
 
-    .control-group select {
-      padding: 0.4rem 2rem 0.4rem 0.75rem;
-      border: none;
-      border-radius: 20px;
-      background: white;
-      font-size: 0.85rem;
-      cursor: pointer;
-      min-width: 140px;
-      height: 32px;
-      transition: all 0.2s;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.75rem center;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
+        .control-group select {
+            padding: 0.4rem 2rem 0.4rem 0.75rem;
+            border: none;
+            border-radius: 20px;
+            background: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            min-width: 140px;
+            height: 32px;
+            transition: all 0.2s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
 
-    .control-group select:hover {
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    }
+        .control-group select:hover {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    .control-group select:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-    }
+        .control-group select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Shape Selector */
-    .shape-selector {
-      display: flex;
-      gap: 0.25rem;
-      background: white;
-      padding: 0.25rem;
-      border-radius: 20px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
+        /* Shape Selector */
+        .shape-selector {
+            display: flex;
+            gap: 0.25rem;
+            background: white;
+            padding: 0.25rem;
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
 
-    .shape-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border: none;
-      border-radius: 50%;
-      background: transparent;
-      cursor: pointer;
-      color: #999;
-      transition: all 0.2s;
-    }
+        .shape-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.2s;
+        }
 
-    .shape-button:hover {
-      background: #f5f5f5;
-      color: #666;
-    }
+        .shape-button:hover {
+            background: #f5f5f5;
+            color: #666;
+        }
 
-    .shape-button.active {
-      background: #000;
-      color: white;
-    }
+        .shape-button.active {
+            background: #000;
+            color: white;
+        }
 
-    /* Avatar Shapes */
-    .avatar-item canvas.shape-circle {
-      border-radius: 50%;
-    }
+        /* Avatar Shapes */
+        .avatar-item canvas.shape-circle {
+            border-radius: 50%;
+        }
 
-    .avatar-item canvas.shape-square {
-      border-radius: 0;
-    }
+        .avatar-item canvas.shape-square {
+            border-radius: 0;
+        }
 
-    /* Grid Section */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        /* Grid Section */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .avatar-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .avatar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .avatar-item canvas {
-      width: 80px;
-      height: 80px;
-      image-rendering: pixelated;
-      transition: transform 0.2s, border-radius 0.2s;
-    }
+        .avatar-item canvas {
+            width: 80px;
+            height: 80px;
+            image-rendering: pixelated;
+            transition: transform 0.2s, border-radius 0.2s;
+        }
 
-    .avatar-item canvas:hover {
-      transform: scale(1.05);
-    }
+        .avatar-item canvas:hover {
+            transform: scale(1.05);
+        }
 
-    .avatar-id {
-      font-size: 0.7rem;
-      color: #666;
-      text-align: center;
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 100%;
-    }
+        .avatar-id {
+            font-size: 0.7rem;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
+        }
 
-    @media (max-width: 768px) {
-      body {
-        padding: 2rem 1rem;
-      }
+        @media (max-width: 768px) {
+            body {
+                padding: 2rem 1rem;
+            }
 
-      h1 {
-        font-size: 1.5rem;
-      }
+            h1 {
+                font-size: 1.5rem;
+            }
 
-      .controls-container {
-        gap: 0.75rem;
-        flex-direction: column;
-      }
+            .controls-container {
+                gap: 0.75rem;
+                flex-direction: column;
+            }
 
-      .theme-selector {
-        padding: 0.5rem;
-      }
+            .theme-selector {
+                padding: 0.5rem;
+            }
 
-      .theme-button {
-        padding: 0.25rem 0.5rem 0.25rem 0.25rem;
-      }
+            .theme-button {
+                padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+            }
 
-      .theme-icon {
-        width: 28px;
-        height: 28px;
-      }
+            .theme-icon {
+                width: 28px;
+                height: 28px;
+            }
 
-      .theme-label {
-        font-size: 0.8rem;
-      }
+            .theme-label {
+                font-size: 0.8rem;
+            }
 
-      .controls {
-        padding: 0.5rem;
-        width: 100%;
-        justify-content: center;
-      }
+            .controls {
+                padding: 0.5rem;
+                width: 100%;
+                justify-content: center;
+            }
 
-      .control-group label {
-        font-size: 0.8rem;
-      }
+            .control-group label {
+                font-size: 0.8rem;
+            }
 
-      .control-group select {
-        min-width: 100px;
-        font-size: 0.8rem;
-      }
+            .control-group select {
+                min-width: 100px;
+                font-size: 0.8rem;
+            }
 
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-        gap: 1rem;
-      }
-    }
-  </style>
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <header>
-      <h1>Avatar Generator</h1>
-      <p class="subtitle">Deterministic avatar generation for your projects</p>
+        <h1>Avatar Generator</h1>
+        <p class="subtitle">Deterministic avatar generation for your projects</p>
     </header>
 
     <div class="controls-container">
-      <div class="theme-selector" id="themeSelector"></div>
-      
-      <div class="controls">
-        <div class="control-group">
-          <label for="colorPreset">Color Preset</label>
-          <select id="colorPreset">
-            <option value="random">Random colors</option>
-            <option value="fixed">Fixed red</option>
-            <option value="palette">Color palette</option>
-            <option value="gradient" selected>Gradient interpolation</option>
-            <option value="variations">With variations</option>
-            <option value="sets">Color sets</option>
-          </select>
-        </div>
-      </div>
+        <div class="theme-selector" id="themeSelector"></div>
 
-      <div class="controls">
-        <div class="control-group">
-          <label>Shape</label>
-          <div class="shape-selector" id="shapeSelector">
-            <button class="shape-button active" data-shape="circle">
-              <svg width="20" height="20" viewBox="0 0 20 20">
-                <circle cx="10" cy="10" r="8" fill="currentColor"/>
-              </svg>
-            </button>
-            <button class="shape-button" data-shape="square">
-              <svg width="20" height="20" viewBox="0 0 20 20">
-                <rect x="2" y="2" width="16" height="16" rx="2" fill="currentColor"/>
-              </svg>
-            </button>
-          </div>
+        <div class="controls">
+            <div class="control-group">
+                <label for="colorPreset">Color Preset</label>
+                <select id="colorPreset">
+                    <option value="random">Random colors</option>
+                    <option value="fixed">Fixed red</option>
+                    <option value="palette">Color palette</option>
+                    <option value="gradient" selected>Gradient interpolation</option>
+                    <option value="variations">With variations</option>
+                    <option value="sets">Color sets</option>
+                </select>
+            </div>
         </div>
-      </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Shape</label>
+                <div class="shape-selector" id="shapeSelector">
+                    <button class="shape-button active" data-shape="circle">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="8" fill="currentColor"/>
+                        </svg>
+                    </button>
+                    <button class="shape-button" data-shape="square">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <rect x="2" y="2" width="16" height="16" rx="2" fill="currentColor"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="app" class="grid"></div>
-  </div>
-  <script type="module" src="/main.ts"></script>
+</div>
+<script type="module" src="/main.ts"></script>
 </body>
 </html>

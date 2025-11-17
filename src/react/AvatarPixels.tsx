@@ -1,8 +1,8 @@
 import {useEffect, useRef} from 'react';
-import {generateAvatar} from '../themes/smile/index.js';
-import type {SmileOptions} from '../themes/smile/types.js';
+import {generateAvatar} from '../themes/pixels/index.js';
+import type {PixelsOptions} from '../themes/pixels/types.js';
 
-export interface AvatarSmileProps extends Partial<Omit<SmileOptions, 'id' | 'size'>> {
+export interface AvatarPixelsProps extends Partial<Omit<PixelsOptions, 'id' | 'size'>> {
     /** Unique identifier for deterministic generation */
     id: string;
     /** Canvas size in pixels (default: 256) */
@@ -16,25 +16,25 @@ export interface AvatarSmileProps extends Partial<Omit<SmileOptions, 'id' | 'siz
 }
 
 /**
- * Smile Avatar React Component
+ * Pixels Avatar React Component
  *
  * @example
  * ```tsx
- * <AvatarSmile 
+ * <AvatarPixels 
  *   id="user@example.com" 
  *   size={256}
- *   foreground="#ff5500"
+ *   gridSize={16}
  * />
  * ```
  */
-export function AvatarSmile({
-                                id,
-                                size = 256,
-                                className,
-                                style,
-                                onGenerate,
-                                ...options
-                            }: AvatarSmileProps) {
+export function AvatarPixels({
+                                 id,
+                                 size = 256,
+                                 className,
+                                 style,
+                                 onGenerate,
+                                 ...options
+                             }: AvatarPixelsProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
