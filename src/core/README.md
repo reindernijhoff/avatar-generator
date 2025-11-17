@@ -38,11 +38,14 @@ Pick a background color from the options. Defaults to white if not specified.
 
 Pick a foreground color from the options. Generates a random vibrant color if not specified.
 
-**`pickColors(options: ColorOptions, random: SeededRandom, count: number, source?: 'foreground' | 'background'): Color[]`**
+*
+*`pickColors(options: ColorOptions, random: SeededRandom, count: number, source?: 'foreground' | 'background'): Color[]`
+**
 
 Pick multiple colors from palette. The `source` parameter determines which palette to use (default: 'foreground').
 
 Behavior depends on the palette type:
+
 - Single color: generates contrasting variations
 - Array of colors: picks from array (with interpolation if enabled)
 - Array of arrays: picks one array, then picks colors from it
@@ -107,11 +110,13 @@ class MyThemeRenderer {
 ### Examples
 
 **Single color:**
+
 ```typescript
 { foreground: '#ff0000' }
 ```
 
 **Color array (picks random):**
+
 ```typescript
 { 
   foreground: ['#ff0000', '#00ff00', '#0000ff'],
@@ -120,6 +125,7 @@ class MyThemeRenderer {
 ```
 
 **Gradient interpolation:**
+
 ```typescript
 { 
   foreground: ['#ff0000', '#ffff00'],
@@ -128,6 +134,7 @@ class MyThemeRenderer {
 ```
 
 **Color sets (array of arrays):**
+
 ```typescript
 {
   foreground: [
@@ -138,6 +145,7 @@ class MyThemeRenderer {
 ```
 
 **With variations:**
+
 ```typescript
 {
   foreground: '#ff0000',

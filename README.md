@@ -22,11 +22,13 @@ npm install eigen-avatar-generator
 ```
 
 For React applications:
+
 ```bash
 npm install eigen-avatar-generator react
 ```
 
 For server-side rendering (Node.js):
+
 ```bash
 npm install eigen-avatar-generator canvas
 ```
@@ -70,11 +72,13 @@ function UserProfile({ userId }) {
 ```
 
 All three themes have corresponding React components:
+
 - `AvatarDigiDoodle` - `eigen-avatar-generator/react/digidoodle`
 - `AvatarInterference` - `eigen-avatar-generator/react/interference`
 - `AvatarPlasma` - `eigen-avatar-generator/react/plasma`
 
-**Note:** React components require React as a peer dependency. The React wrapper is fully tree-shakeable - vanilla JS users won't include any React code.
+**Note:** React components require React as a peer dependency. The React wrapper is fully tree-shakeable - vanilla JS
+users won't include any React code.
 
 ### Browser (Vanilla JS)
 
@@ -272,6 +276,7 @@ interface BaseAvatarProps {
 ```
 
 **Example with all props:**
+
 ```tsx
 <AvatarDigiDoodle
   id="user@example.com"
@@ -321,7 +326,8 @@ npm install
 npm run dev
 ```
 
-The example project in `/example` is a separate Vite project that uses the package via relative imports. This demonstrates how the library works in practice.
+The example project in `/example` is a separate Vite project that uses the package via relative imports. This
+demonstrates how the library works in practice.
 
 ## Future Themes
 
