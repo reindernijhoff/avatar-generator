@@ -28,7 +28,7 @@ const colorPresets: Record<string, Partial<DigiDoodleOptions>> = {
         interpolate: false,
     },
     gradient: {
-        background: '#1a1a1a',
+        background: '#f0f0f0',
         foreground: ["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
         interpolate: true,
     },
@@ -223,7 +223,7 @@ function generateAvatars() {
     // Generate avatars for IDs 1-120
     for (let i = 1; i <= 120; i++) {
         const id = String(i);
-        const canvas = generateSingleAvatar(id, 128);
+        const canvas = generateSingleAvatar(id, 120);
 
         // Add shape class to canvas
         canvas.className = `shape-${currentShape}`;

@@ -77,6 +77,9 @@ export function createCanvas(size: number): { canvas: AvatarCanvas; ctx: AvatarC
             throw new Error('Failed to get 2D context from canvas');
         }
 
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
         return {canvas, ctx};
     }
 

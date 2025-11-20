@@ -48,15 +48,17 @@ export class SmileRenderer {
         ctx.fillStyle = this.backgroundColor;
         ctx.fillRect(0, 0, size, size);
 
+        const radius = Math.ceil(size / 2);
+
         ctx.fillStyle = this.faceColor0;
         ctx.beginPath();
-        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
         ctx.fill();
 
         // Create clipping mask with the circle
         ctx.save();
         ctx.beginPath();
-        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.arc(size / 2, size / 2, radius, 0, Math.PI * 2);
         ctx.clip();
 
         // Draw smiley face (will be clipped to the circle)
@@ -82,8 +84,8 @@ export class SmileRenderer {
         const faceSize = size * 0.7;
 
         // Random variations
-        const mouthWidth = this.random.randomFloat(0.4, 0.55); // Width variation
-        const eyeOffset = this.random.randomFloat(0.2, 0.28); // Eye horizontal position variation
+        const mouthWidth = this.random.randomFloat(0.3, 0.4); // Width variation
+        const eyeOffset = this.random.randomFloat(0.2, 0.25); // Eye horizontal position variation
         const isWideSmile = this.random.randomBoolean(0.5); // :) or :D
 
         // Random positioning and rotation
@@ -111,8 +113,8 @@ export class SmileRenderer {
         ctx.lineJoin = 'round';
 
         // Draw eyes (oval shapes) - now relative to center (0, 0)
-        this.drawEye(ctx, -faceSize * eyeOffset, -faceSize * 0.15, size);
-        this.drawEye(ctx, faceSize * eyeOffset, -faceSize * 0.15, size);
+        this.drawEye(ctx, -faceSize * eyeOffset, -faceSize * 0.125, size);
+        this.drawEye(ctx, faceSize * eyeOffset, -faceSize * 0.125, size);
 
         // Draw mouth (curved smile) - now relative to center (0, 0)
         this.drawMouth(ctx, faceSize, mouthWidth * .5, isWideSmile);
@@ -125,8 +127,8 @@ export class SmileRenderer {
      * Draw an oval eye
      */
     private drawEye(ctx: AvatarContext, x: number, y: number, size: number): void {
-        const eyeWidth = size * 0.04;
-        const eyeHeight = size * 0.08;
+        const eyeWidth = size * 0.025;
+        const eyeHeight = size * 0.055;
 
         ctx.beginPath();
         ctx.ellipse(x, y, eyeWidth, eyeHeight, 0, 0, Math.PI * 2);

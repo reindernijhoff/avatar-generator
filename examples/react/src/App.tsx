@@ -27,7 +27,7 @@ const colorPresets: Record<ColorPreset, Partial<DigiDoodleOptions>> = {
         interpolate: false,
     },
     gradient: {
-        background: '#1a1a1a',
+        background: '#f0f0f0',
         foreground: ["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
         interpolate: true,
     },
@@ -197,7 +197,7 @@ function App() {
                             {theme === 'digidoodle' && (
                                 <AvatarDigiDoodle
                                     id={id}
-                                    size={128}
+                                    size={120}
                                     layers={1}
                                     borderMargin={0}
                                     gridSize={9}
@@ -207,7 +207,7 @@ function App() {
                             {theme === 'interference' && (
                                 <AvatarInterference
                                     id={id}
-                                    size={128}
+                                    size={120}
                                     sources={-1}
                                     wavelength={1}
                                     sourceArea={10}
@@ -218,7 +218,7 @@ function App() {
                             {theme === 'plasma' && (
                                 <AvatarPlasma
                                     id={id}
-                                    size={128}
+                                    size={120}
                                     timeOffset={-1}
                                     scale1={-1}
                                     scale2={-1}
@@ -230,14 +230,14 @@ function App() {
                             {theme === 'smile' && (
                                 <AvatarSmile
                                     id={id}
-                                    size={128}
+                                    size={120}
                                     {...colorOptions}
                                 />
                             )}
                             {theme === 'pixels' && (
                                 <AvatarPixels
                                     id={id}
-                                    size={128}
+                                    size={120}
                                     gridSize={9}
                                     {...colorOptions}
                                 />
