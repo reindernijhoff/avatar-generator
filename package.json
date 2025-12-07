@@ -87,9 +87,9 @@
     "example": "npm run dev --prefix example"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.2.7",
     "@types/shelljs": "^0.8.15",
-    "react": "^18.3.1",
+    "react": "^19.2.1",
     "shelljs": "^0.10.0",
     "shx": "^0.4.0",
     "tsx": "^4.7.1",
