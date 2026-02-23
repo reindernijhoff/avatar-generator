@@ -8,13 +8,14 @@
  *   bun examples/bun/bun-server.ts
  */
 
-import {generateAvatar} from '../../dist/themes/digidoodle/index.js';
-import {canvasToBuffer, initBunCanvas} from '../../dist/core/canvas.js';
+import {createCanvas} from "@napi-rs/canvas";
+import {generateAvatar} from '../../dist/themes/digidoodle';
+import {canvasToBuffer, setCreateCanvasHandle} from '../../dist';
 
 const PORT = 3000;
 
 // Initialize @napi-rs/canvas before starting server
-await initBunCanvas();
+setCreateCanvasHandle(createCanvas);
 
 Bun.serve({
     port: PORT,

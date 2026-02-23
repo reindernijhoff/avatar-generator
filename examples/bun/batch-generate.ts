@@ -12,13 +12,14 @@ import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import {generateAvatar} from '../../dist/themes/digidoodle/index.js';
-import {canvasToBuffer, initBunCanvas} from '../../dist/core/canvas.js';
+import {canvasToBuffer, setCreateCanvasHandle} from '../../dist/core/canvas.js';
+import {createCanvas} from "@napi-rs/canvas";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Initialize @napi-rs/canvas
-await initBunCanvas();
+setCreateCanvasHandle(createCanvas);
 
 // Output directory
 const outputDir = path.join(__dirname, 'output');

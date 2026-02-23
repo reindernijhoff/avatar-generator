@@ -68,8 +68,8 @@
     }
   },
   "peerDependencies": {
-    "canvas": "^2.11.2",
     "@napi-rs/canvas": "^0.1.0",
+    "canvas": "^3.2.1",
     "react": "^18.0.0"
   },
   "peerDependenciesMeta": {
@@ -102,9 +102,11 @@
     "tsx": "^4.7.1",
     "typescript": "^5.9.3",
     "vite": "^7.0.0",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^2.3.0"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
   }
 }

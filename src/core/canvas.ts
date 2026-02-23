@@ -5,72 +5,16 @@
 import type {AvatarCanvas, AvatarContext} from './types.js';
 
 /**
- * Check if we are running in Node.js environment
- */
-export function isNode(): boolean {
-    return typeof window === 'undefined' && typeof process !== 'undefined' && !!process.versions?.node;
-}
-
-/**
  * Check if we are running in browser environment
  */
 export function isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof document !== 'undefined';
 }
 
-/**
- * Check if we are running in Bun environment
- */
-export function isBun(): boolean {
-    return typeof process !== 'undefined' && !!process.versions?.['bun'];
-}
+let createCanvasHandle: any = null;
 
-/**
- * Lazy-loaded node-canvas for server-side rendering (Node.js)
- */
-let nodeCanvas: any = null;
-
-/**
- * Lazy-loaded @napi-rs/canvas for server-side rendering (Bun)
- */
-let bunCanvas: any = null;
-
-/**
- * Load node-canvas (only in Node.js environment)
- */
-async function loadNodeCanvas(): Promise<any> {
-    if (nodeCanvas) return nodeCanvas;
-
-    try {
-        // Dynamic import for optional dependency
-        // @ts-ignore - optional peer dependency
-        nodeCanvas = await import('canvas');
-        return nodeCanvas;
-    } catch (error) {
-        throw new Error(
-            'canvas package not found. Install it with: npm install canvas\n' +
-            'See: https://github.com/Automattic/node-canvas for installation instructions.'
-        );
-    }
-}
-
-/**
- * Load @napi-rs/canvas (only in Bun environment)
- */
-async function loadBunCanvas(): Promise<any> {
-    if (bunCanvas) return bunCanvas;
-
-    try {
-        // Dynamic import for optional dependency
-        // @ts-ignore - optional peer dependency
-        bunCanvas = await import('@napi-rs/canvas');
-        return bunCanvas;
-    } catch (error) {
-        throw new Error(
-            '@napi-rs/canvas package not found. Install it with: bun add @napi-rs/canvas\n' +
-            'See: https://github.com/Brooooooklyn/canvas for installation instructions.'
-        );
-    }
+export function setCreateCanvasHandle(handle: any) {
+    createCanvasHandle = handle;
 }
 
 /**
@@ -112,117 +56,19 @@ export function createCanvas(size: number): { canvas: AvatarCanvas; ctx: AvatarC
         ctx.imageSmoothingQuality = 'high';
 
         return {canvas, ctx};
-    }
-
-    // Bun: try to use @napi-rs/canvas
-    if (isBun()) {
-        if (!bunCanvas) {
-            throw new Error(
-                '@napi-rs/canvas package must be loaded first. ' +
-                'Use createCanvasAsync() in async context or call initBunCanvas() first.'
-            );
-        }
-
-        const canvas = bunCanvas.createCanvas(size, size);
+    } else if (createCanvasHandle) {
+        const canvas = createCanvasHandle(size, size);
         const ctx = canvas.getContext('2d');
         return {canvas, ctx};
     }
 
-    // Node.js: try to load node-canvas
-    if (isNode()) {
-        if (!nodeCanvas) {
-            throw new Error(
-                'canvas package must be loaded first. ' +
-                'Use createCanvasAsync() in async context or call initNodeCanvas() first.'
-            );
-        }
-
-        const canvas = nodeCanvas.createCanvas(size, size);
-        const ctx = canvas.getContext('2d');
-        return {canvas, ctx};
-    }
-
-    throw new Error('Unsupported environment: not browser, Node.js, or Bun');
+    throw new Error('Unsupported environment: not browser, createCanvasHandle not set');
 }
 
-/**
- * Create canvas (async variant for Node.js/Bun)
- * Use this in async context to dynamically load the canvas library
- */
-export async function createCanvasAsync(size: number): Promise<{ canvas: AvatarCanvas; ctx: AvatarContext }> {
-    if (isBrowser()) {
-        return createCanvas(size);
-    }
-
-    if (isBun()) {
-        const bc = await loadBunCanvas();
-        const canvas = bc.createCanvas(size, size);
-        const ctx = canvas.getContext('2d');
-        return {canvas, ctx};
-    }
-
-    if (isNode()) {
-        const nc = await loadNodeCanvas();
-        const canvas = nc.createCanvas(size, size);
-        const ctx = canvas.getContext('2d');
-        return {canvas, ctx};
-    }
-
-    throw new Error('Unsupported environment: not browser, Node.js, or Bun');
-}
-
-/**
- * Initialize node-canvas for sync usage
- * Call this in your app setup if you're doing server-side rendering in Node.js
- */
-export async function initNodeCanvas(): Promise<void> {
-    if (isNode() && !nodeCanvas) {
-        await loadNodeCanvas();
-    }
-}
-
-/**
- * Initialize @napi-rs/canvas for sync usage
- * Call this in your app setup if you're doing server-side rendering in Bun
- */
-export async function initBunCanvas(): Promise<void> {
-    if (isBun() && !bunCanvas) {
-        await loadBunCanvas();
-    }
-}
-
-/**
- * Convert canvas to buffer (Node.js and Bun only)
- */
 export function canvasToBuffer(canvas: AvatarCanvas, mimeType: 'image/png' | 'image/jpeg' = 'image/png'): Buffer {
-    if (isBrowser()) {
-        throw new Error('canvasToBuffer is only available in Node.js or Bun');
-    }
-
-    // For @napi-rs/canvas (Bun) - uses toBuffer or encodeSync
-    if (isBun()) {
-        if (typeof canvas.toBuffer === 'function') {
-            return canvas.toBuffer(mimeType);
-        }
-        // Some versions use encodeSync
-        if (typeof canvas.encodeSync === 'function') {
-            const format = mimeType === 'image/jpeg' ? 'jpeg' : 'png';
-            return canvas.encodeSync(format);
-        }
-        throw new Error('Canvas does not have a toBuffer or encodeSync method. Check @napi-rs/canvas version.');
-    }
-
-    // For node-canvas (Node.js)
-    if (typeof canvas.toBuffer !== 'function') {
-        throw new Error('Canvas does not have a toBuffer method. Use node-canvas package.');
-    }
-
     return canvas.toBuffer(mimeType);
 }
 
-/**
- * Convert canvas to data URL (browser + Node.js)
- */
 export function canvasToDataURL(canvas: AvatarCanvas, mimeType: 'image/png' | 'image/jpeg' = 'image/png'): string {
     return canvas.toDataURL(mimeType);
 }

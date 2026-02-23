@@ -10,15 +10,16 @@
 
 import fs from 'fs';
 import path from 'path';
+import {createCanvas} from "canvas";
 import {fileURLToPath} from 'url';
 import {generateAvatar} from '../../dist/themes/digidoodle/index.js';
-import {canvasToBuffer, initNodeCanvas} from '../../dist/core/canvas.js';
+import {canvasToBuffer, setCreateCanvasHandle} from '../../dist/core/canvas.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Initialize node-canvas
-await initNodeCanvas();
+setCreateCanvasHandle(createCanvas);
 
 // Output directory
 const outputDir = path.join(__dirname, 'output');

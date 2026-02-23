@@ -9,14 +9,15 @@
  */
 
 import express from 'express';
+import {createCanvas} from "canvas";
 import {generateAvatar} from '../../dist/themes/digidoodle/index.js';
-import {canvasToBuffer, initNodeCanvas} from '../../dist/core/canvas.js';
+import {canvasToBuffer, setCreateCanvasHandle} from '../../dist/core/canvas.js';
 
 const app = express();
 const PORT = 3000;
 
 // Initialize node-canvas before starting server
-await initNodeCanvas();
+setCreateCanvasHandle(createCanvas);
 
 // Avatar endpoint
 app.get('/avatar/:id', (req, res) => {
