@@ -104,7 +104,8 @@
   },
   "scripts": {
     "dev": "npm run dev --prefix examples/vanilla",
-    "build": "vite build",
+    "build": "npm run clean && npm run build:ts",
+    "build:ts": "vite build",
     "clean": "shx rm -rf dist node_modules/.cache/.tsbuildinfo",
     "prepare-publish": "tsx ./scripts/preparePublish.ts",
     "example": "npm run dev --prefix examples/vanilla"
@@ -113,16 +114,14 @@
     "@types/react": "^18.3.12",
     "@types/shelljs": "^0.8.15",
     "react": "^18.3.1",
-    "shelljs": "^0.10.0",
+    "shelljs": "^0.8.5",
     "shx": "^0.4.0",
     "tsx": "^4.7.1",
     "typescript": "^5.9.3",
     "vite": "^7.0.0",
-    "vite-plugin-dts": "^2.3.0"
+    "vite-plugin-dts": "^4.2.1"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "dependencies": {
   }
 }
