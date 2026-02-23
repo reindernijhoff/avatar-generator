@@ -15,14 +15,9 @@ export type {InterferenceOptions} from './types.js';
  */
 export function generateAvatar(options: InterferenceOptions): HTMLCanvasElement {
     const {id, size, canvas: existingCanvas} = options;
-
-    // Get or create canvas
     const {canvas, ctx} = getCanvas(size, existingCanvas);
-
-    // Create seeded random
     const random = new SeededRandom(id);
 
-    // Create and render
     const renderer = new InterferenceRenderer(random, options);
     renderer.render(ctx);
 

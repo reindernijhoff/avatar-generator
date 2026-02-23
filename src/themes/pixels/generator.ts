@@ -29,9 +29,6 @@ export class PixelsRenderer {
     render(ctx: AvatarContext): void {
         const {size, gridSize} = this.options;
 
-        // Pick colors using the color system
-        // We'll generate more colors to have variety for each pixel
-        const colorCount = Math.min(gridSize * gridSize, 256);
         this.backgroundColor = pickBackgroundColor(this.options, this.random);
 
         // Render background
@@ -52,7 +49,7 @@ export class PixelsRenderer {
         for (let y = 0; y < gridSize; y++) {
             for (let x = 0; x < gridSize; x++) {
                 // Pick a random color for each pixel
-                const color = pickForegroundColor(this.options, this.random)
+                const color = pickForegroundColor(this.options, this.random);
 
                 ctx.fillStyle = colorToString(color);
 

@@ -13,7 +13,7 @@ export interface InterferenceOptions extends GeneratorOptions, ColorOptions {
     /** Number of wave source points (default: -1 for random 2-5, or specify exact number) */
     sources?: number;
 
-    /** Wave length (default: 0.2) */
+    /** Wave length (default: 1) */
     wavelength?: number;
 
     /** Source point area bounds (default: 10) */

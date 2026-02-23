@@ -41,7 +41,6 @@ export function AvatarDigiDoodle({
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        // Generate avatar directly into the canvas ref
         const canvas = generateAvatar({
             id,
             size,
@@ -49,7 +48,6 @@ export function AvatarDigiDoodle({
             ...options
         });
 
-        // Trigger callback
         onGenerate?.(canvas);
     }, [id, size, JSON.stringify(options)]);
 

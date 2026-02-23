@@ -406,7 +406,6 @@ function pickColorsFromArray(
         const idx1 = (i + randomOffset) % colors.length;
         const idx2 = (idx1 + 1) % colors.length;
 
-
         const color1 = parseColor(colors[idx1]);
         const color2 = parseColor(colors[idx2]);
 
@@ -452,14 +451,4 @@ function generateColorVariations(baseColor: Color, random: SeededRandom, count: 
     }
 
     return colors;
-}
-
-/**
- * Generate a single color variant
- */
-function generateColorVariant(baseColor: Color, random: SeededRandom): Color {
-    const hsl = rgbToHsl(baseColor);
-    const hueShift = random.randomFloat(-30, 30);
-    const newHue = (hsl.h + hueShift + 360) % 360;
-    return hslToRgb(newHue, hsl.s, hsl.l);
 }

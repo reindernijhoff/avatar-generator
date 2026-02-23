@@ -50,6 +50,14 @@
       "types": "./dist/themes/plasma/index.d.ts",
       "import": "./dist/themes/plasma/index.js"
     },
+    "./themes/smile": {
+      "types": "./dist/themes/smile/index.d.ts",
+      "import": "./dist/themes/smile/index.js"
+    },
+    "./themes/pixels": {
+      "types": "./dist/themes/pixels/index.d.ts",
+      "import": "./dist/themes/pixels/index.js"
+    },
     "./react": {
       "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js"
@@ -65,6 +73,14 @@
     "./react/plasma": {
       "types": "./dist/react/AvatarPlasma.d.ts",
       "import": "./dist/react/AvatarPlasma.js"
+    },
+    "./react/smile": {
+      "types": "./dist/react/AvatarSmile.d.ts",
+      "import": "./dist/react/AvatarSmile.js"
+    },
+    "./react/pixels": {
+      "types": "./dist/react/AvatarPixels.d.ts",
+      "import": "./dist/react/AvatarPixels.js"
     }
   },
   "peerDependencies": {
@@ -87,11 +103,11 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "npm run dev --prefix example",
+    "dev": "npm run dev --prefix examples/vanilla",
     "build": "vite build",
     "clean": "shx rm -rf dist node_modules/.cache/.tsbuildinfo",
     "prepare-publish": "tsx ./scripts/preparePublish.ts",
-    "example": "npm run dev --prefix example"
+    "example": "npm run dev --prefix examples/vanilla"
   },
   "devDependencies": {
     "@types/react": "^18.3.12",

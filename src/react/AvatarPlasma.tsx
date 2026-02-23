@@ -40,7 +40,6 @@ export function AvatarPlasma({
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        // Generate avatar directly into the canvas ref
         const canvas = generateAvatar({
             id,
             size,
@@ -48,7 +47,6 @@ export function AvatarPlasma({
             ...options
         });
 
-        // Trigger callback
         onGenerate?.(canvas);
     }, [id, size, JSON.stringify(options)]);
 

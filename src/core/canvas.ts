@@ -1,12 +1,5 @@
-/**
- * Canvas abstraction for browser and Node.js
- */
-
 import type {AvatarCanvas, AvatarContext} from './types.js';
 
-/**
- * Check if we are running in browser environment
- */
 export function isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof document !== 'undefined';
 }
@@ -17,12 +10,8 @@ export function setCreateCanvasHandle(handle: any) {
     createCanvasHandle = handle;
 }
 
-/**
- * Get canvas and context - reuses existing canvas if provided, otherwise creates a new one
- */
 export function getCanvas(size: number, existingCanvas?: AvatarCanvas): { canvas: AvatarCanvas; ctx: AvatarContext } {
     if (existingCanvas) {
-        // Reuse existing canvas
         existingCanvas.width = size;
         existingCanvas.height = size;
         const ctx = existingCanvas.getContext('2d');
@@ -34,13 +23,9 @@ export function getCanvas(size: number, existingCanvas?: AvatarCanvas): { canvas
         return {canvas: existingCanvas, ctx};
     }
 
-    // Create new canvas
     return createCanvas(size);
 }
 
-/**
- * Create canvas for browser or Node.js
- */
 export function createCanvas(size: number): { canvas: AvatarCanvas; ctx: AvatarContext } {
     if (isBrowser()) {
         const canvas = document.createElement('canvas');

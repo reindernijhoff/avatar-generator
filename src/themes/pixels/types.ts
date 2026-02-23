@@ -10,7 +10,7 @@ import type {ColorOptions} from '../../core/colors.js';
  * Pixels generator options
  */
 export interface PixelsOptions extends GeneratorOptions, ColorOptions {
-    /** Grid size (number of pixels per side, default: 16) */
+    /** Grid size (number of pixels per side, default: 9) */
     gridSize?: number;
 }
 

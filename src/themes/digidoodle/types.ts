@@ -10,7 +10,7 @@ import type {ColorOptions} from '../../core/colors.js';
  * DigiDoodle generator options
  */
 export interface DigiDoodleOptions extends GeneratorOptions, ColorOptions {
-    /** Grid size (number of pixels per side, default: 8) */
+    /** Grid size (number of pixels per side, default: 9) */
     gridSize?: number;
     /** Pixel fill probability 0-1 (default: 0.5) */
     density?: number;
@@ -18,7 +18,7 @@ export interface DigiDoodleOptions extends GeneratorOptions, ColorOptions {
     symmetry?: boolean;
     /** Number of color layers to draw (default: 1) */
     layers?: number;
-    /** border margin (default: 0) */
+    /** Border margin (default: 1) */
     borderMargin?: number;
 }
 

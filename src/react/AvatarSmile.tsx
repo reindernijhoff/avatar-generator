@@ -40,7 +40,6 @@ export function AvatarSmile({
     useEffect(() => {
         if (!canvasRef.current) return;
 
-        // Generate avatar directly into the canvas ref
         const canvas = generateAvatar({
             id,
             size,
@@ -48,7 +47,6 @@ export function AvatarSmile({
             ...options
         });
 
-        // Trigger callback
         onGenerate?.(canvas);
     }, [id, size, JSON.stringify(options)]);
 

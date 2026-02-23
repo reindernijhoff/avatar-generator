@@ -1,39 +1,36 @@
-# Examples
+# Node.js Examples
 
-These are **Node.js server-side** examples. For a browser example, see `/example` directory in the root.
+Server-side avatar generation using Node.js with the `canvas` package.
 
-**Important**: Build the package first before running these examples:
+## Setup
+
+Build the package first, then install dependencies:
 
 ```bash
+cd ../..
 npm run build
+cd examples/node
+npm install
 ```
 
-## Node.js Examples
+## Server
 
-### Server-side Avatar API
-
-Express server that generates avatars via HTTP endpoints:
+Express server that generates avatars via HTTP:
 
 ```bash
-npm install express canvas
-npm run build  # Build package first
-node examples/node-server.js
+npm run server
 ```
-
-Visit:
 
 - http://localhost:3000/avatar/user@example.com
 - http://localhost:3000/avatar/alice?size=128
 - http://localhost:3000/avatar/bob?size=256&gridSize=12
 
-### Batch Generation
+## Batch Generation
 
-Generate multiple avatars to files:
+Generate multiple avatars to PNG files:
 
 ```bash
-npm install canvas
-npm run build  # Build package first
-node examples/batch-generate.js
+npm run batch
 ```
 
-Avatars are saved to `examples/output/`.
+Avatars are saved to `output/`.

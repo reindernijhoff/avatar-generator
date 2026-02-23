@@ -1,6 +1,6 @@
-# Avatar Generator Example
+# Vanilla Example
 
-Minimal example project using the avatar generator.
+Vite + TypeScript app demonstrating all five avatar themes without React.
 
 ## Run
 
@@ -9,22 +9,13 @@ npm install
 npm run dev
 ```
 
-Open browser to the shown URL (usually http://localhost:5173).
+Open http://localhost:5173.
 
-## What does this do?
+## Features
 
-This is a separate Vite project that uses the parent package via relative imports:
+- All five themes (DigiDoodle, Interference, Plasma, Smile, Pixels)
+- Dynamic theme switching
+- Color preset controls
+- 120 avatars in a responsive grid, each deterministically generated from its ID
 
-```typescript
-import { generateAvatar } from '../../src/themes/digidoodle/index.js';
-```
-
-It generates a grid of 63 avatars with IDs '1' through '63', where each ID deterministically produces the same avatar.
-
-## Structure
-
-- `index.html` - Minimal HTML with grid layout
-- `main.ts` - Generates avatars and fills the grid
-- `package.json` - Vite dev dependencies (no avatar-generator dependency)
-
-This demonstrates how the library works without needing to be published to npm.
+Uses the parent package via relative imports — no npm publish required.

@@ -1,0 +1,14 @@
+{
+  "name": "node-examples",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "node node-server.js",
+    "batch": "node batch-generate.js"
+  },
+  "dependencies": {
+    "canvas": "^3.2.1",
+    "express": "^5.1.0"
+  }
+}
