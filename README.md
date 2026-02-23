@@ -33,6 +33,12 @@ For server-side rendering (Node.js):
 npm install eigen-avatar-generator canvas
 ```
 
+For server-side rendering (Bun):
+
+```bash
+bun add eigen-avatar-generator @napi-rs/canvas
+```
+
 ## Quick Start
 
 See the `/example` project for a working browser example:
@@ -102,6 +108,25 @@ import fs from 'fs';
 
 // Initialize node-canvas (only needed once at app startup)
 await initNodeCanvas();
+
+const canvas = generateAvatar({ 
+  id: 'user@example.com', 
+  size: 256 
+});
+
+const buffer = canvasToBuffer(canvas, 'image/png');
+fs.writeFileSync('avatar.png', buffer);
+```
+
+### Bun (Server-side)
+
+```typescript
+import { generateAvatar } from 'avatar-generator/themes/digidoodle';
+import { canvasToBuffer, initBunCanvas } from 'avatar-generator/core';
+import fs from 'fs';
+
+// Initialize @napi-rs/canvas (only needed once at app startup)
+await initBunCanvas();
 
 const canvas = generateAvatar({ 
   id: 'user@example.com', 
@@ -244,7 +269,10 @@ import {
   canvasToBuffer,
   canvasToDataURL,
   isNode,
-  isBrowser 
+  isBrowser,
+  isBun,
+  initNodeCanvas,
+  initBunCanvas
 } from 'avatar-generator/core';
 
 // Random utilities
@@ -328,6 +356,62 @@ npm run dev
 
 The example project in `/example` is a separate Vite project that uses the package via relative imports. This
 demonstrates how the library works in practice.
+
+## Bun Support
+
+This library supports [Bun](https://bun.sh/) for server-side rendering. Bun uses a different canvas package than Node.js.
+
+### Installation
+
+```bash
+bun add eigen-avatar-generator @napi-rs/canvas
+```
+
+### Usage
+
+```typescript
+import { generateAvatar } from 'eigen-avatar-generator/themes/digidoodle';
+import { canvasToBuffer, initBunCanvas } from 'eigen-avatar-generator/core';
+import fs from 'fs';
+
+// Initialize @napi-rs/canvas (only needed once at app startup)
+await initBunCanvas();
+
+const canvas = generateAvatar({ 
+  id: 'user@example.com', 
+  size: 256 
+});
+
+const buffer = canvasToBuffer(canvas, 'image/png');
+fs.writeFileSync('avatar.png', buffer);
+```
+
+### Bun HTTP Server Example
+
+```typescript
+import { generateAvatar } from 'eigen-avatar-generator/themes/digidoodle';
+import { canvasToBuffer, initBunCanvas } from 'eigen-avatar-generator/core';
+
+await initBunCanvas();
+
+Bun.serve({
+  port: 3000,
+  fetch(req: Request): Response {
+    const url = new URL(req.url);
+    if (url.pathname.startsWith('/avatar/')) {
+      const id = url.pathname.slice(8);
+      const canvas = generateAvatar({ id, size: 256 });
+      const buffer = canvasToBuffer(canvas, 'image/png');
+      return new Response(buffer, {
+        headers: { 'Content-Type': 'image/png' }
+      });
+    }
+    return new Response('Not found', { status: 404 });
+  },
+});
+```
+
+See `/examples/bun` for complete working examples.
 
 ## Future Themes
 

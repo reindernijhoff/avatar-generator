@@ -37,15 +37,3 @@ node examples/batch-generate.js
 ```
 
 Avatars are saved to `examples/output/`.
-
-## React Example (Future)
-
-A separate React wrapper package is planned:
-
-```tsx
-import { AvatarGenerator } from '@avatar-generator/react';
-
-function UserProfile({ email }) {
-  return <AvatarGenerator theme="digidoodle" id={email} size={128} />;
-}
-```

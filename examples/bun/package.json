@@ -1,0 +1,14 @@
+{
+  "name": "bun-examples",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "bun run bun-server.ts",
+    "batch": "bun run batch-generate.ts"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.0"
+  }
+}
+

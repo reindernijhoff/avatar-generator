@@ -13,7 +13,8 @@ export default defineConfig({
             insertTypesEntry: true,
             include: ['src/**/*'],
             outDir: 'dist',
-            rollupTypes: true
+            rollupTypes: false, // Keep module structure for proper type exports
+            copyDtsFiles: true,
         })
     ],
     build: {
@@ -26,7 +27,7 @@ export default defineConfig({
             formats: ['es'],
         },
         rollupOptions: {
-            external: ['canvas', 'react', 'react/jsx-runtime'],
+            external: ['canvas', '@napi-rs/canvas', 'react', 'react/jsx-runtime'],
             output: {
                 format: 'es',
                 entryFileNames: '[name].js',
